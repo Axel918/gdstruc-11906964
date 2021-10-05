@@ -72,21 +72,18 @@ public class Main {
                 System.out.println("Draw " + number + " cards.");
                 pause.nextLine();
 
-                if (stack.size() <= 0)
+                if (stack.size() < number)
                 {
-                    return;
-                }
-                else
-                {
-                    for (int i = 0; i < number; i++)
-                    {
-                        stack.peek();
-                        playerHand.push(stack.peek());
-                        stack.pop();
-                    }
-                    pause.nextLine();
+                    System.out.println("Deck only has " + stack.size() + " cards left. Drawing " + stack.size() + " cards instead.");
+                    number = stack.size();
                 }
 
+                for (int i = 0; i < number; i++)
+                {
+                    stack.peek();
+                    playerHand.push(stack.peek());
+                    stack.pop();
+                }
                 pause.nextLine();
             }
             // DISCARD X CARDS
@@ -95,12 +92,15 @@ public class Main {
                 System.out.println("Discard " + number + " cards.");
                 pause.nextLine();
 
-                if (playerHand.size() < number)
+                if (playerHand.size() <= 0)
                 {
-                    System.out.println("Player has no cards.");
+                    System.out.println("Nothing to discard.");
                 }
-                else
+                else if (playerHand.size() < number && playerHand.size() != 0)
                 {
+                    System.out.println("Need to discard " + number + " cards, but hand only has " + playerHand.size() + ". Discarding " + playerHand.size() + " cards instead.");
+                    number = playerHand.size();
+
                     for (int i = 0; i < number; i++)
                     {
                         playerHand.peek();
@@ -108,7 +108,17 @@ public class Main {
                         playerHand.pop();
                     }
                 }
+                else
+                {
+                    System.out.println("You discarded " + number + " cards.");
 
+                    for (int i = 0; i < number; i++)
+                    {
+                        playerHand.peek();
+                        discardedStack.push(playerHand.peek());
+                        playerHand.pop();
+                    }
+                }
                 pause.nextLine();
             }
             // DRAW X CARDS FROM DISCARDED PILE
@@ -117,12 +127,26 @@ public class Main {
                 System.out.println("Get " + number + " cards from discarded pile.");
                 pause.nextLine();
 
-                if (discardedStack.size() < number)
+                if (discardedStack.size() <= 0)
                 {
-                    System.out.println("No more cards from discarded pile.");
+                    System.out.println("The discarded pile has no cards.");
+                }
+                else if (discardedStack.size() < number && discardedStack.size() != 0)
+                {
+                    System.out.println("Discarded stack only has " + discardedStack.size() + " cards. Drawing " + discardedStack.size() + " cards instead.");
+                    number = discardedStack.size();
+
+                    for (int i = 0; i < number; i++)
+                    {
+                        discardedStack.peek();
+                        playerHand.push(discardedStack.peek());
+                        discardedStack.pop();
+                    }
                 }
                 else
                 {
+                    System.out.println("You drew " + number + " cards.");
+
                     for (int i = 0; i < number; i++)
                     {
                         discardedStack.peek();
@@ -144,7 +168,8 @@ public class Main {
                 playerHand.printStack();
             }
 
-            System.out.println("\nRemaining cards in player deck: " + playerHand.size());
+            System.out.println("\nTotal number of cards in player's hand: " + playerHand.size());
+            System.out.println("Remaining cards in player deck: " + stack.size());
             System.out.println("Number of cards in the discarded pile: " + discardedStack.size());
             pause.nextLine();
         }
