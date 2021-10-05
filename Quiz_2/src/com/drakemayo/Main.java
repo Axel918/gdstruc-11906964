@@ -23,5 +23,9 @@ public class Main {
         // Tells if the list contains an element based on user input
         // Tells the index number of that element
         playerLinkedList.printList();
+
+        // Reprints the linked list
+        // but the 1st element has been removed
+        playerLinkedList.printList();
     }
 }

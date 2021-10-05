@@ -33,15 +33,17 @@ public class PlayerLinkedList {
         System.out.println("Input Level Number");
         int levelNumber = scanner3.nextInt();
 
-        deleteElement(head);
         System.out.print("\nHead -> ");
         while(current != null)
         {
-            playerList.add(current.getPlayer());
-            System.out.print(current.getPlayer());
-            System.out.print(" -> ");
+            if (current.getPlayer() != null) {
+                playerList.add(current.getPlayer());
+                System.out.print(current.getPlayer());
+                System.out.print(" -> ");
+                size++;
+            }
+
             current = current.getNextPlayer();
-            size++;
         }
         System.out.println("null");
         System.out.println("Element count: " + size);
@@ -69,7 +71,8 @@ public class PlayerLinkedList {
 
         PlayerNode temp = head;
         head = head.getNextPlayer();
-        temp.setNextPlayer(null);
+        temp.setPlayer(null);
+        temp = temp.getNextPlayer();
 
         return temp;
     }
