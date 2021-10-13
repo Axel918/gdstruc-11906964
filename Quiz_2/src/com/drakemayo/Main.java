@@ -20,13 +20,40 @@ public class Main {
         PlayerLinkedList.addToFront(asuna);
         PlayerLinkedList.addToFront(heathcliff);
 
+        Scanner scanner1 = new Scanner(System.in);
+        Scanner scanner2 = new Scanner(System.in);
+        Scanner scanner3 = new Scanner(System.in);
+
+        System.out.println("Input ID Number");
+        int idNumber = scanner1.nextInt();
+
+        System.out.println("Input a name (Case Sensitive)");
+        String name = scanner2.nextLine();
+
+        System.out.println("Input Level Number");
+        int levelNumber = scanner3.nextInt();
+
+        List<Player> playerList = new ArrayList<>();
+
         // Prints the linked list
-        // Tells if the list contains an element based on user input
-        // Tells the index number of that element
-        playerLinkedList.printList();
+        System.out.println("\nPrint the Linked List");
+        playerLinkedList.printList(playerList);
+
+        // Prints the number of elements present in the linked list
+        playerLinkedList.printSize();
+
+        // Checks if the linked list contains a certain element
+        playerLinkedList.containsElement(idNumber, name, levelNumber, playerList);
+
+        // Indicates the index number of the input element
+        playerLinkedList.indexNumber(idNumber, name, levelNumber, playerList);
 
         // Reprints the linked list
         // but the 1st element has been removed
-        playerLinkedList.printList();
+        System.out.println("\nPrint the Linked List (1st Element has been removed)");
+        playerLinkedList.printList(playerList);
+
+        // Prints the number of elements present in the linked list
+        playerLinkedList.printSize();
     }
 }

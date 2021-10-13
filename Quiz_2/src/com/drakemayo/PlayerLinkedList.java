@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 public class PlayerLinkedList {
     public static PlayerNode head;
+    public int size;
 
+    // Add an element to the Linked List
     public static void addToFront(Player player)
     {
         PlayerNode playerNode = new PlayerNode(player);
@@ -14,54 +16,58 @@ public class PlayerLinkedList {
         head = playerNode;
     }
 
-    public void printList()
+    // Prints the Linked List
+    public void printList(List<Player> playerList)
     {
-        List<Player> playerList = new ArrayList<>();
         PlayerNode current = head;
-        int size = 0;
+        size = 0;
 
-        Scanner scanner1 = new Scanner(System.in);
-        Scanner scanner2 = new Scanner(System.in);
-        Scanner scanner3 = new Scanner(System.in);
-
-        System.out.println("Input ID Number");
-        int idNumber = scanner1.nextInt();
-
-        System.out.println("Input a name (Case Sensitive)");
-        String name = scanner2.nextLine();
-
-        System.out.println("Input Level Number");
-        int levelNumber = scanner3.nextInt();
-
-        System.out.print("\nHead -> ");
+        System.out.print("Head -> ");
         while(current != null)
         {
             if (current.getPlayer() != null) {
                 playerList.add(current.getPlayer());
                 System.out.print(current.getPlayer());
                 System.out.print(" -> ");
-                size++;
+                sizeCount();
             }
 
             current = current.getNextPlayer();
         }
         System.out.println("null");
-        System.out.println("Element count: " + size);
-
-        for (Player p : playerList)
-        {
-            System.out.println(p);
-        }
-
-        System.out.println("\nDoes the list contain " + name + "(ID: " + idNumber + ", Level: " + levelNumber + ")?");
-        System.out.println(playerList.contains(new Player(idNumber, name, levelNumber)));
-
-        System.out.println("\nIndex Number: ");
-        System.out.println(playerList.indexOf(new Player(idNumber, name, levelNumber)));
 
         deleteElement(head);
     }
 
+    // Checks if the linked list contains an element
+    public void containsElement(int idNumber, String name, int levelNumber, List<Player> playerList)
+    {
+        System.out.println("\nDoes the list contain " + name + "(ID: " + idNumber + ", Level: " + levelNumber + ")?");
+        System.out.println(playerList.contains(new Player(idNumber, name, levelNumber)));
+    }
+
+    // Checks what index number the element is in the Linked List
+    public void indexNumber(int idNumber, String name, int levelNumber, List<Player> playerList)
+    {
+        System.out.println("\nIndex Number: ");
+        System.out.println(playerList.indexOf(new Player(idNumber, name, levelNumber)));
+    }
+
+    // Counts number of elements in the Linked List
+    public int sizeCount()
+    {
+        size++;
+
+        return size;
+    }
+
+    // Prints size count
+    public void printSize()
+    {
+        System.out.println("Element count: " + size);
+    }
+
+    // Deletes an element in the linked list
     public PlayerNode deleteElement(PlayerNode head)
     {
         if (head == null)
