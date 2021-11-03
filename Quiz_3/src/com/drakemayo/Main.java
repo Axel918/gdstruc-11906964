@@ -61,5 +61,6 @@ public class Main {
         }
 
         System.out.println("Matchmaking Finished!");
+        System.out.println(game + " games have been made.");
     }
 }
